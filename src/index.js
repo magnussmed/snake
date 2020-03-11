@@ -16,7 +16,7 @@ class Game extends Component {
 
 	draw = ( p, s ) => {
 		p.background( 51 )
-		this.s.update();
+		this.s.update( p );
 		this.s.show();
 
 		p.fill( 255, 0, 100 );
