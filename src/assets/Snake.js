@@ -45,10 +45,11 @@ class Snake {
 		if ( this.total === this.tail.length ) {
 			for ( var i = 0; i < this.tail.length-1; i++ ) {
 				this.tail[i] = this.tail[i+1];
-				console.log("test");
 			}
 		}
 		this.tail[this.total-1] = this.p.createVector( this.x, this.y );
+
+		console.log(this.total);
 
 		this.x = this.x + this.xspeed * this.scale;
 		this.y = this.y + this.yspeed * this.scale;
@@ -68,7 +69,7 @@ class Snake {
 	eat = ( p ) => {
 		var d = this.p.dist( this.x, this.y, this.xfeed, this.yfeed )
 		if ( d < 1 ) {
-			console.log(this.tail);
+			this.total++;
 			return true;
 		} else {
 			return false;
@@ -80,12 +81,15 @@ class Snake {
 		let y = Math.round(0 + Math.random() * (this.height - 0));
 		x = Math.ceil((x) / this.scale ) * this.scale;
 		y = Math.ceil((y) / this.scale ) * this.scale;
+
 		if ( x >= this.width ) {
 			x = this.width - this.scale;
 		}
+
 		if ( y >= this.height ) {
 			y = this.height - this.scale;
 		}
+
 		this.p.fill( 255, 0, 100 );
 		this.p.rect( x, y, this.scale, this.scale );
 		this.xfeed = x;
