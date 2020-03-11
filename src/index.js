@@ -5,20 +5,26 @@ import Snake from "./assets/Snake.js";
 
 class Game extends Component {
 	s = null
+	feed = null
 
 	setup = ( p, s ) => {
 		p.createCanvas( 600, 600 );
-		p.background( 51 )
-		p.frameRate( 10 )
 		this.s = new Snake( p )
+		p.frameRate( 10 );
+		this.feed = this.s.randomFeed();
 	}
 
 	draw = ( p, s ) => {
+		p.background( 51 )
 		this.s.update();
 		this.s.show();
+
+		p.fill( 255, 0, 100 );
+		p.rect( this.feed[0], this.feed[1], 20, 20 );
+
 		var r = this.s.eat();
 		if ( r ) {
-			this.s.randomFeed();
+			this.feed = this.s.randomFeed();
 		}
 	}
 
