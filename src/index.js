@@ -1,20 +1,30 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Sketch from "react-p5";
-import Snake from "./assets/game/Snake.js";
+import Snake from "./assets/Snake.js";
 
 class Game extends Component {
-	x = 50
-	y = 50
+	s = null
 
-	setup = ( p ) => {
+	setup = ( p, s ) => {
 		p.createCanvas( 600, 600 );
-		new Snake( p )
+		p.background( 51 )
+		p.frameRate( 10 )
+		this.s = new Snake( p )
+	}
+
+	draw = ( p, s ) => {
+		this.s.update();
+		this.s.show();
+		var r = this.s.eat();
+		if ( r ) {
+			this.s.randomFeed();
+		}
 	}
 
 	render() {
 		return (
-			<Sketch setup={this.setup} draw={this.draw} />
+			<Sketch setup={ this.setup } draw={ this.draw } />
 		);
 	}
 }
