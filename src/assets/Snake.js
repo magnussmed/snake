@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import "p5/lib/addons/p5.sound";
 
 class Snake {
 	width = 600
 	height = 600
-	x = 0
-	y = 0
-	xspeed = 1
-	yspeed = 0
 	xfeed = null
 	yfeed = null
 	scale = 20
+	x = ( 600 / 2 ) - 20;
+	y = ( 600 / 2 ) - 20;
+	xspeed = 0;
+	yspeed = 0;
 	total = 0
 	highscore = 1
 	tail = []
@@ -97,6 +98,10 @@ class Snake {
 			if ( d < 1 ) {
 				this.total = 0;
 				this.tail = [];
+				this.x = ( this.width / 2 ) - this.scale;
+				this.y = ( this.height / 2 ) - this.scale;
+				this.xspeed = 0;
+				this.yspeed = 0;
 				this.score( this.total );
 			}
 		}
@@ -124,7 +129,7 @@ class Snake {
 				<h2>Score: { score + 1 }</h2>
 			</div>
 		);
-		ReactDOM.render(element, document.getElementById('counter'));
+		ReactDOM.render( element, document.getElementById( 'counter' ) );
 	}
 
 	randomFeed = ( p ) => {
