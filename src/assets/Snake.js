@@ -24,23 +24,47 @@ class Snake {
 		p.keyPressed = ( p ) => {
 			if ( p.keyCode === 38 ) {
 				// Up
-				this.dir( 0, -1 );
+				if ( this.total > 0 ) {
+					if ( this.yspeed !== 1 ) {
+						this.dir( 0, -1 );
+					}
+				} else {
+					this.dir( 0, -1 );
+				}
 			} else if ( p.keyCode === 40 ) {
 				// Down
-				this.dir( 0, 1 );
+				if ( this.total > 0 ) {
+					if ( this.yspeed !== -1 ) {
+						this.dir( 0, 1 );
+					}
+				} else {
+					this.dir( 0, 1 );
+				}
 			} else if ( p.keyCode === 39 ) {
 				// Right
-				this.dir( 1, 0 );
+				if ( this.total > 0 ) {
+					if ( this.xspeed !== -1 ) {
+						this.dir( 1, 0 );
+					}
+				} else {
+					this.dir( 1, 0 );
+				}
 			} else if ( p.keyCode === 37 ) {
 				// Left
-				this.dir( -1, 0 );
+				if ( this.total > 0 ) {
+					if ( this.xspeed !== 1 ) {
+						this.dir( -1, 0 );
+					}
+				} else {
+					this.dir( -1, 0 );
+				}
 			}
 		}
 	}
 
 	dir = ( x, y ) => {
-		this.xspeed = x;
 		this.yspeed = y;
+		this.xspeed = x;
 	}
 
 	update = ( p ) => {
