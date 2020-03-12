@@ -12,10 +12,12 @@ class Game extends Component {
 		this.s = new Snake( p )
 		p.frameRate( 10 );
 		this.feed = this.s.randomFeed();
+		this.s.score( 0 );
 	}
 
 	draw = ( p, s ) => {
 		p.background( 51 )
+		this.s.death( p );
 		this.s.update( p );
 		this.s.show();
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 class Snake {
 	width = 600
@@ -49,8 +50,6 @@ class Snake {
 		}
 		this.tail[this.total-1] = this.p.createVector( this.x, this.y );
 
-		console.log(this.total);
-
 		this.x = this.x + this.xspeed * this.scale;
 		this.y = this.y + this.yspeed * this.scale;
 
@@ -66,14 +65,36 @@ class Snake {
 		this.p.rect( this.x, this.y, this.scale, this.scale );
 	}
 
+	death = ( p ) => {
+		for ( var i = 0; i < this.tail.length; i++ ) {
+			var pos = this.tail[i];
+			var d = this.p.dist( this.x, this.y, pos.x, pos.y );
+			if ( d < 1 ) {
+				this.total = 0;
+				this.tail = [];
+				this.score( this.total );
+			}
+		}
+	}
+
 	eat = ( p ) => {
 		var d = this.p.dist( this.x, this.y, this.xfeed, this.yfeed )
 		if ( d < 1 ) {
 			this.total++;
+			this.score( this.total );
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	score = ( score ) => {
+		const element = (
+			<div>
+				<h2>Score: { score + 1 }</h2>
+			</div>
+		);
+		ReactDOM.render(element, document.getElementById('counter'));
 	}
 
 	randomFeed = ( p ) => {
