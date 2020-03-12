@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import "p5/lib/addons/p5.sound";
 
 class Snake {
 	width = 600
 	height = 600
 	xfeed = null
 	yfeed = null
-	scale = 20
-	x = ( 600 / 2 ) - 20;
-	y = ( 600 / 2 ) - 20;
+	scale = 30
+	x = ( 600 / 2 ) - 30;
+	y = ( 600 / 2 ) - 30;
 	xspeed = 0;
 	yspeed = 0;
 	total = 0
@@ -133,8 +132,8 @@ class Snake {
 	}
 
 	randomFeed = ( p ) => {
-		let x = Math.round(0 + Math.random() * (this.width - 0));
-		let y = Math.round(0 + Math.random() * (this.height - 0));
+		let x = Math.round( 0 + Math.random() * this.width );
+		let y = Math.round( 0 + Math.random() * this.height );
 		x = Math.ceil((x) / this.scale ) * this.scale;
 		y = Math.ceil((y) / this.scale ) * this.scale;
 
@@ -152,6 +151,19 @@ class Snake {
 		this.yfeed = y;
 
 		return [x, y];
+	}
+
+	makeGrid = ( p ) => {
+		for ( var x = 0; x < this.width; x += this.width / 20 ) {
+			for ( var y = 0; y < this.height; y += this.height / 20 ) {
+				this.p.stroke( 57 );
+				this.p.strokeWeight( 1 );
+				this.p.line( x, 0, x, this.height );
+				this.p.line( 0, y, this.width, y );
+			}
+		}
+		this.p.line( 0, this.width, this.width, this.width );
+		this.p.line( this.height, 0, this.height, this.height );
 	}
 }
 export default Snake;

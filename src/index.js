@@ -17,12 +17,13 @@ class Game extends Component {
 
 	draw = ( p, s ) => {
 		p.background( 51 )
+		this.s.makeGrid();
 		this.s.death( p );
 		this.s.update( p );
 		this.s.show();
 
 		p.fill( 255, 0, 100 );
-		p.rect( this.feed[0], this.feed[1], 20, 20 );
+		p.rect( this.feed[0], this.feed[1], 30, 30 );
 
 		var r = this.s.eat();
 		if ( r ) {
