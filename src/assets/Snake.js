@@ -12,6 +12,7 @@ class Snake {
 	yfeed = null
 	scale = 20
 	total = 0
+	highscore = 1
 	tail = []
 
 	constructor( p ) {
@@ -89,8 +90,13 @@ class Snake {
 	}
 
 	score = ( score ) => {
+		if ( score >= this.highscore ) {
+			this.highscore = score;
+		}
+
 		const element = (
 			<div>
+				<h2>High score: { this.highscore + 1 }</h2>
 				<h2>Score: { score + 1 }</h2>
 			</div>
 		);
